@@ -6,12 +6,17 @@ namespace Treinee.Quake.Domain.Entity
 {
     public class Armor : BaseEntity
     {
-        public Armor()
+        public Armor(string description)
         {
-            Deaths = new HashSet<Death>();
+            Deaths           = new HashSet<Death>();
+            this.Description = description;
         }
 
-        public string Description { get; set; }
+        protected Armor()
+        { 
+        }
+
+        public string Description { get; private set; }
         public virtual ICollection<Death> Deaths { get; set; }
     }
 }
