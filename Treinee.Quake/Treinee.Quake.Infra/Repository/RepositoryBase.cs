@@ -21,11 +21,7 @@ namespace Treinee.Quake.Infra.Repository
             _dbSet   = _context.Set<TEntity>();
             
         }
-        public async Task Add(TEntity entity)
-        {
-            await _dbSet.AddAsync(entity);
-        }
-
+        public async Task Add(TEntity entity) => await _dbSet.AddAsync(entity);
         public Task Delete(int id)
         {
             var entity = _dbSet.Find(id);
@@ -34,17 +30,9 @@ namespace Treinee.Quake.Infra.Repository
             return Task.CompletedTask;
         }
 
-        public async Task<IEnumerable<TEntity>> GetAll()
-        {
-            return await _dbSet.ToListAsync();
-        }
+        public async Task<IEnumerable<TEntity>> GetAll() => await _dbSet.ToListAsync();
 
         public async Task<TEntity> GetById(int id) => await _dbSet.FindAsync(id);
-
-        public virtual async Task Save()
-        {
-            await _context.SaveChangesAsync();
-        }
 
         public virtual Task Update(TEntity entity)
         {
@@ -52,10 +40,7 @@ namespace Treinee.Quake.Infra.Repository
             return Task.CompletedTask;
         }
 
-        public async Task<IEnumerable<TEntity>> GetAll(Expression<Func<TEntity, bool>> predicate)
-        {
-            return await _dbSet.Where(predicate).ToListAsync();
-        }
+        public async Task<IEnumerable<TEntity>> GetAll(Expression<Func<TEntity, bool>> predicate) => await _dbSet.Where(predicate).ToListAsync();
 
         private bool disposed = false;
 

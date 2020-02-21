@@ -35,7 +35,9 @@ namespace Trainee.Feed.Core
 
                     if (line.Contains("ClientUserinfoChanged"))
                     {
+                        var changed = Regex.Match(line, @"n\\(.+?)\\t").Groups[1];
 
+                        Console.WriteLine($"{changed}");
                     }
 
                     if (line.Contains("Kill"))
@@ -50,7 +52,7 @@ namespace Trainee.Feed.Core
                         var armor = line.Substring(line.LastIndexOf(" by ") + 1).Replace("by", string.Empty).Trim();
 
 
-                        Console.WriteLine($"{killer} matou {killed} com {armor} ");
+                        //Console.WriteLine($"{killer} matou {killed} com {armor} ");
                     }
 
                             

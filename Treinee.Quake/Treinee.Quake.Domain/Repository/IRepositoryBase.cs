@@ -10,7 +10,6 @@ namespace Treinee.Quake.Domain.Repository
     public interface IRepositoryBase<TEntity>  where TEntity : BaseEntity
     {
         Task Add(TEntity entity);
-        Task Save();
         Task Delete(int id);
         Task Update(TEntity entity);
         Task<TEntity> GetById(int id);
