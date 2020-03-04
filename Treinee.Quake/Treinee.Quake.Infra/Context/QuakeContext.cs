@@ -1,12 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Treinee.Quake.Domain.Entity;
 
 namespace Treinee.Quake.Infra.Context
 {
     public class QuakeContext : DbContext
     {
+        public DbSet<Player> Player { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

@@ -9,6 +9,11 @@ namespace Trainee.Feed
             ParserManager parser = new ParserManager();
 
             parser.GetDeaths();
+
+            foreach (var d in parser.Deaths)
+            {
+                System.Console.WriteLine($"{d.Killer.Name} matou {d.Killed.Name} by {d.IdArmor}");
+            }
         }
     }
 }

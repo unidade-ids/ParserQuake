@@ -13,7 +13,7 @@ namespace Treinee.Quake.Infra.Repository
 {
     public class RepositoryBase<TEntity> : IDisposable, IRepositoryBase<TEntity> where TEntity : BaseEntity
     {
-        private readonly QuakeContext _context;
+        protected readonly QuakeContext _context;
         private readonly DbSet<TEntity> _dbSet;
         public RepositoryBase(QuakeContext context)
         {

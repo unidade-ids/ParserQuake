@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Treinee.Quake.Domain.Entity
 {
-    public class GamePlayer
+    public class GamePlayer : BaseEntity
     {
         public GamePlayer(Game game, Player player)
         {
