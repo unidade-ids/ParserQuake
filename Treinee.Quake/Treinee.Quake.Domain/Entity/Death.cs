@@ -4,12 +4,12 @@ namespace Treinee.Quake.Domain.Entity
 {
     public class Death : BaseEntity
     {
-        public Death(Player killer, Player killed, Game game, Armor idArmor)
+        public Death(Player killer, Player killed, Game game, Armor armor)
         {
             this.Killer = killer;
             this.Killed = killed;
             this.Game   = game;
-            this.Armor  = Armor;
+            this.Armor  = armor;
         }
 
         protected Death() 

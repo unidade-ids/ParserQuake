@@ -11,7 +11,7 @@ namespace Treinee.Quake.Domain.Entity
             Deaths            = new HashSet<Death>();
             GamePlayers       = new HashSet<GamePlayer>();
 
-            this.DateRegister = dataRegister;
+            this.DateRegister = DateTime.Now;
         }
 
         protected Game()

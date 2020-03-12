@@ -30,11 +30,11 @@ namespace Treinee.Quake.Infra.Configuration
                 .HasColumnName("ID_GAME");
 
             builder.HasOne(k => k.Killer)
-                .WithMany(k => k.Killers)
+                .WithMany(k => k.KillerDeaths)
                 .HasForeignKey(f => f.IdKiller);
 
             builder.HasOne(k => k.Killed)
-                   .WithMany(k => k.Killeds)
+                   .WithMany(k => k.KilledDeaths)
                    .HasForeignKey(f => f.IdKilled);
 
             builder.HasOne(k => k.Armor)

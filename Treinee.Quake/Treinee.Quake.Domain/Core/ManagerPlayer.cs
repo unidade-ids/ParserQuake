@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Treinee.Quake.Domain.Entity;
 using Treinee.Quake.Domain.Repository;
 
@@ -16,12 +17,14 @@ namespace Treinee.Quake.Domain.Core
             _repositoryPlayer = repositoryPlayer;
             _unitOfWork       = unitOfWork;
         }
-        public ManagerPlayer(string row)
+        public ManagerPlayer(string row, IRepositorioPlayer repositoryPlayer, IUnitOfWork unitOfWork)
         {
-            this.Row = row;
+            this.Row          = row;
+            _repositoryPlayer = repositoryPlayer;
+            _unitOfWork = unitOfWork;
         }
 
-        public Player Save()
+        public async Task<Player> Save()
         {
             if (!string.IsNullOrEmpty(this.Row))
             {
@@ -30,9 +33,9 @@ namespace Treinee.Quake.Domain.Core
 
                 if (!_repositoryPlayer.TherePlayer(name))
                 {
-                    _repositoryPlayer.Add(this.Player);
-                    _unitOfWork.Save();
-
+                    await _repositoryPlayer.Add(this.Player);
+                    await _unitOfWork.Save();
+                    
                     return this.Player;
                 }
             }

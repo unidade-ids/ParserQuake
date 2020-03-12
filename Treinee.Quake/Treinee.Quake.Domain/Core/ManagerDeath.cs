@@ -1,4 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Treinee.Quake.Domain.Entity;
 using Treinee.Quake.Domain.Enum;
 using Treinee.Quake.Domain.Extensions;
@@ -22,38 +24,57 @@ namespace Treinee.Quake.Domain.Core
         private readonly IRepositoryBase<Death> _repositoryDeath;
         private readonly IRepositorioPlayer _repositoryPlayer;
         private readonly IUnitOfWork _unitOfWork;
-        public ManagerDeath(IRepositoryBase<Game> repositoryGame, IRepositoryBase<GamePlayer> repositoryGamePlayer, IRepositorioPlayer repositoryPlayer, IUnitOfWork unitOfWork)
+        public ManagerDeath(IRepositoryBase<Game> repositoryGame, IRepositoryBase<GamePlayer> repositoryGamePlayer,
+            IRepositorioPlayer repositoryPlayer, IUnitOfWork unitOfWork
+            ,IRepositoryBase<Armor> repositoryArmor, IRepositoryBase<Death> repositoryDeath)
         {
             _repositoryGame       = repositoryGame;
             _repositoryGamePlayer = repositoryGamePlayer;
             _repositoryPlayer     = repositoryPlayer;
+            _repositoryArmor      = repositoryArmor;
+            _repositoryDeath      = repositoryDeath;
             _unitOfWork           = unitOfWork;
         }
-        public ManagerDeath(string row)
+        public ManagerDeath(string row, IRepositoryBase<Game> repositoryGame, IRepositoryBase<GamePlayer> repositoryGamePlayer,
+                                        IRepositorioPlayer repositoryPlayer, IRepositoryBase<Armor> repositoryArmor, 
+                                        IRepositoryBase<Death> repositoryDeath, IUnitOfWork unitOfWork, Game game)
         {
-            this.Row = row;
+            this.Row              = row;
+            this.Game             = game;
+            _repositoryGame       = repositoryGame;
+            _repositoryGamePlayer = repositoryGamePlayer;
+            _repositoryPlayer     = repositoryPlayer;
+            _repositoryArmor      = repositoryArmor;
+            _repositoryDeath      = repositoryDeath;
+            _unitOfWork           = unitOfWork;
         }
 
-        public async void Save()
+        public async Task Save()
         {
-            if (!string.IsNullOrEmpty(this.Row))
+            try
             {
-                var killed = Regex.Match(Row, @"killed (.+?)by").Groups[1].ToString().Trim();
-                var index  = Row.Substring(Row.LastIndexOf(":")).Replace(":", string.Empty).Trim();
-                var killer = index.Before("killed").Trim();
-                var armor  = Row.Substring(Row.LastIndexOf(" by ") + 1).Replace("by", string.Empty).Trim();
+                if (!string.IsNullOrEmpty(this.Row))
+                {
+                    var killed = Regex.Match(Row, @"killed (.+?)by").Groups[1].ToString().Trim();
+                    var index = Row.Substring(Row.LastIndexOf(":")).Replace(":", string.Empty).Trim();
+                    var killer = index.Before("killed").Trim();
+                    var armor = Row.Substring(Row.LastIndexOf(" by ") + 1).Replace("by", string.Empty).Trim();
 
-                this.Killed = await _repositoryPlayer.GetByName(killed);
-                this.Killer = await _repositoryPlayer.GetByName(killer);
+                    this.Killed = _repositoryPlayer.GetByName(killed);
+                    this.Killer = _repositoryPlayer.GetByName(killer);
 
-                var idArmor = (DeathEnum)System.Enum.Parse(typeof(DeathEnum), armor);
+                    var idArmor = (DeathEnum)System.Enum.Parse(typeof(DeathEnum), armor);
 
-                this.Armor = await _repositoryArmor.GetById((short)idArmor);
+                    this.Armor = _repositoryArmor.GetById((short)idArmor).Result;
 
-                this.Death = new Death(Killer, Killed, Game, Armor);
+                    this.Death = new Death(Killer, Killed, Game, Armor);
 
-                await _repositoryDeath.Add(Death);
-                await _unitOfWork.Save();
+                    await _repositoryDeath.Add(Death);
+                    await _unitOfWork.Save();
+                }
+            }
+            catch (Exception ex)
+            { 
             }
         }
     }

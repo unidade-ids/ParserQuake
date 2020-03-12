@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - UI", "1 - UI", "{926854
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Util", "4 - Util", "{A0F46AA1-33EE-442C-9122-DD4AC3114CA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trainee.Feed", "Trainee.Feed\Trainee.Feed.csproj", "{239D96E9-16D3-46BE-BAA0-8F3DA778709D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trainee.Feed", "Trainee.Feed\Trainee.Feed.csproj", "{239D96E9-16D3-46BE-BAA0-8F3DA778709D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

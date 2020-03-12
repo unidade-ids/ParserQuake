@@ -12,7 +12,7 @@ namespace Treinee.Quake.Infra.Repository
         {
         }
 
-        public Player GetByName(string name) => this._context.Player.(p => p.Name.Contains(name));
+        public Player GetByName(string name) => this._context.Player.FirstOrDefault(p => p.Name.Contains(name));
         public bool TherePlayer(string name)
         {
             return _context.Player.Any(p => p.Name == name);

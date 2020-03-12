@@ -1,4 +1,5 @@
-﻿using Treinee.Quake.Domain.Entity;
+﻿using System.Threading.Tasks;
+using Treinee.Quake.Domain.Entity;
 using Treinee.Quake.Domain.Repository;
 
 namespace Treinee.Quake.Domain.Core
@@ -17,20 +18,29 @@ namespace Treinee.Quake.Domain.Core
             _unitOfWork = unitOfWork;
         }
 
-        public ManagerGamePlayer(Game game, Player player)
+        public ManagerGamePlayer(Game game, Player player, IRepositoryBase<GamePlayer> repositoryGamePlayer, IUnitOfWork unitOfWork)
         {
-            this.Game   = game;
-            this.Player = player;
+            this.Game             = game;
+            this.Player           = player;
+            _repositoryGamePlayer = repositoryGamePlayer;
+            _unitOfWork = unitOfWork;
         }
 
-        public void Save()
+        public async Task Save()
         {
-            if (this.Game != null && this.Player != null)
+            try
             {
-                this.GamePlayer = new GamePlayer(this.Game, this.Player);
+                if (this.Game != null && this.Player != null)
+                {
+                    this.GamePlayer = new GamePlayer(this.Game, this.Player);
 
-                _repositoryGamePlayer.Add(GamePlayer);
-                _unitOfWork.Save();
+                    await _repositoryGamePlayer.Add(GamePlayer);
+                    await _unitOfWork.Save();
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw;
             }
         }
     }

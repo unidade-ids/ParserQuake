@@ -8,10 +8,11 @@ namespace Treinee.Quake.Domain.Entity
     {
         public Player(string name)
         {
-            Killeds = new HashSet<Death>();
-            Killers = new HashSet<Death>();
-
-            this.Name = name;
+            KillerDeaths = new HashSet<Death>();
+            KilledDeaths = new HashSet<Death>();
+            GamePlayers  = new HashSet<GamePlayer>();
+            this.Name    = name;
+            this.DataRegister = DateTime.Now;
         }
 
         protected Player()
@@ -19,8 +20,9 @@ namespace Treinee.Quake.Domain.Entity
         }
 
         public string Name { get; private set; }
-        public virtual GamePlayer GamePlayer { get; set; }
-        public virtual ICollection<Death> Killeds { get; set; }
-        public virtual ICollection<Death> Killers { get; set; }
+        public DateTime DataRegister { get; set; }
+        public virtual ICollection<GamePlayer> GamePlayers { get; set; }
+        public virtual ICollection<Death> KillerDeaths { get; set; }
+        public virtual ICollection<Death> KilledDeaths { get; set; }
     }
 }

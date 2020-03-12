@@ -20,6 +20,8 @@ namespace Treinee.Quake.Infra.Configuration
 
             builder.Property(p => p.IdPlayer)
                    .HasColumnName("ID_PLAYER");
+
+            builder.Ignore(p => p.ID);
         }
     }
 }
