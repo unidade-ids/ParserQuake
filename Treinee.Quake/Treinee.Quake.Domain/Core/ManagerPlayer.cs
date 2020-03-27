@@ -15,29 +15,39 @@ namespace Treinee.Quake.Domain.Core
         public ManagerPlayer(IRepositorioPlayer repositoryPlayer, IUnitOfWork unitOfWork)
         {
             _repositoryPlayer = repositoryPlayer;
-            _unitOfWork       = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
         public ManagerPlayer(string row, IRepositorioPlayer repositoryPlayer, IUnitOfWork unitOfWork)
         {
             this.Row          = row;
             _repositoryPlayer = repositoryPlayer;
-            _unitOfWork = unitOfWork;
+            _unitOfWork       = unitOfWork;
         }
 
         public async Task<Player> Save()
         {
-            if (!string.IsNullOrEmpty(this.Row))
+            try
             {
-                var name    = Regex.Match(this.Row, @"n\\(.+?)\\t").Groups[1].ToString().Trim();
-                this.Player = new Player(name);
-
-                if (!_repositoryPlayer.TherePlayer(name))
+                if (!string.IsNullOrEmpty(this.Row))
                 {
-                    await _repositoryPlayer.Add(this.Player);
-                    await _unitOfWork.Save();
-                    
+                    var name = Regex.Match(this.Row, @"n\\(.+?)\\t").Groups[1].ToString().Trim();
+
+                    if (!_repositoryPlayer.TherePlayer(name))
+                    {
+                        this.Player = new Player(name);
+
+                        await _repositoryPlayer.Add(this.Player);
+                        await _unitOfWork.Save();
+                    }
+                    else
+                        this.Player = _repositoryPlayer.GetByName(name);
+
                     return this.Player;
                 }
+            }
+            catch (System.Exception)
+            {
+                throw;
             }
 
             return null;

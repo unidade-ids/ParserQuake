@@ -2,7 +2,43 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div>
+    Estamos testando
 </div>
+
+tetete
+<div id="cnt-res">
+    <button data-bind="click: alert">Add</button>
+</div>
+
+<div id="cnt-res2">
+    <button data-bind="click: alert">Add</button>
+</div>
+
+@section Scripts
+{
+    <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.5.0.js"></script>
+    <script>
+        function resultViewModel() {
+            self = this;
+
+            self.alert = function () {
+                alert('Hello');
+            }
+        }
+
+        ko.applyBindings(new resultViewModel(), document.getElementById('cnt-res'));
+
+        function result2ViewModel() {
+            self = this;
+
+            self.alert = function () {
+                alert('Hello 2');
+            }
+        }
+
+        ko.cleanNode(document.getElementById('cnt-res'));
+        ko.applyBindings(new result2ViewModel(), document.getElementById('cnt-res'));
+
+    </script>
+}

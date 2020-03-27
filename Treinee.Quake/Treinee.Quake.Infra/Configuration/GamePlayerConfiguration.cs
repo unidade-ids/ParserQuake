@@ -7,7 +7,7 @@ using Treinee.Quake.Domain.Entity;
 
 namespace Treinee.Quake.Infra.Configuration
 {
-    public class GamePlayerConfiguration : IEntityTypeConfiguration<GamePlayer>
+    public class GamePlayerConfiguration : IEntityTypeConfiguration<GamePlayer>, IConfiguration
     {
         public void Configure(EntityTypeBuilder<GamePlayer> builder)
         {

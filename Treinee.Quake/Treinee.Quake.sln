@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Util", "4 - Util", "{A0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trainee.Feed", "Trainee.Feed\Trainee.Feed.csproj", "{239D96E9-16D3-46BE-BAA0-8F3DA778709D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Treinee.Quake.IoC", "Treinee.Quake.IoC\Treinee.Quake.IoC.csproj", "{5EDCA316-9392-4EAE-A002-16CCA0EDAC7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{239D96E9-16D3-46BE-BAA0-8F3DA778709D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{239D96E9-16D3-46BE-BAA0-8F3DA778709D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{239D96E9-16D3-46BE-BAA0-8F3DA778709D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EDCA316-9392-4EAE-A002-16CCA0EDAC7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EDCA316-9392-4EAE-A002-16CCA0EDAC7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EDCA316-9392-4EAE-A002-16CCA0EDAC7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EDCA316-9392-4EAE-A002-16CCA0EDAC7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +56,7 @@ Global
 		{A09BD81C-1342-4479-9D3B-D0F38E1503B2} = {D55D5A86-39B3-4603-8222-46F3EEBB1708}
 		{A1569C57-AE2B-4E1A-90CF-A0B60625F4DD} = {9268547C-D8CE-4442-884B-C2A12CFD3624}
 		{239D96E9-16D3-46BE-BAA0-8F3DA778709D} = {A0F46AA1-33EE-442C-9122-DD4AC3114CA9}
+		{5EDCA316-9392-4EAE-A002-16CCA0EDAC7B} = {D33E7489-57EC-4BB5-B605-8D5CC4A66A7A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {63C2196F-E2F8-4824-B1E0-0504FFCC8723}

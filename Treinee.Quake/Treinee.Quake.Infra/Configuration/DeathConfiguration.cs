@@ -7,7 +7,7 @@ using Treinee.Quake.Domain.Entity;
 
 namespace Treinee.Quake.Infra.Configuration
 {
-    public class DeathConfiguration : IEntityTypeConfiguration<Death>
+    public class DeathConfiguration : IEntityTypeConfiguration<Death>, IConfiguration
     {
         public void Configure(EntityTypeBuilder<Death> builder)
         {

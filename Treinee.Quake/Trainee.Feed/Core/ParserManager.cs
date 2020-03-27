@@ -22,7 +22,7 @@ namespace Trainee.Feed.Core
         }
 
         public void GetDeaths(IRepositoryBase<Game> gameRepository, IRepositorioPlayer playerRepository,
-                              IRepositoryBase<GamePlayer> gamePlayerRepository, IRepositoryBase<Armor> armorRepository,
+                              IRepositorioGamePlayer gamePlayerRepository, IRepositoryBase<Armor> armorRepository,
                               IRepositoryBase<Death> deathRepository, IUnitOfWork unit)
         {
             var service = new ReadFile();

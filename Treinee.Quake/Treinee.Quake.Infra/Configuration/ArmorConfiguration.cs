@@ -5,7 +5,7 @@ using Treinee.Quake.Domain.Entity;
 
 namespace Treinee.Quake.Infra.Configuration
 {
-    public class ArmorConfiguration : IEntityTypeConfiguration<Armor>
+    public class ArmorConfiguration : IEntityTypeConfiguration<Armor>, IConfiguration
     {
         public void Configure(EntityTypeBuilder<Armor> builder)
         {

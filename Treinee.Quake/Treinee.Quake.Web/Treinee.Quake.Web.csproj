@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Treinee.Quake.IoC\Treinee.Quake.IoC.csproj" />
+  </ItemGroup>
+
 
 
 </Project>

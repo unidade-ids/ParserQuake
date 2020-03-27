@@ -1,4 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Reflection;
 using Treinee.Quake.Domain.Entity;
 using Treinee.Quake.Infra.Configuration;
 
@@ -6,6 +9,11 @@ namespace Treinee.Quake.Infra.Context
 {
     public class QuakeContext : DbContext
     {
+        public QuakeContext(DbContextOptions<QuakeContext> options)
+            :base(options)
+        {
+        }
+
         public DbSet<Player> Player { get; set; }
         public DbSet<Armor> Armor { get; set; }
         public DbSet<Death> Death { get; set; }
@@ -14,18 +22,14 @@ namespace Treinee.Quake.Infra.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new ArmorConfiguration());
-            modelBuilder.ApplyConfiguration(new DeathConfiguration());
-            modelBuilder.ApplyConfiguration(new GameConfiguration());
-            modelBuilder.ApplyConfiguration(new GamePlayerConfiguration());
-            modelBuilder.ApplyConfiguration(new PlayerConfiguration());
-        }
+            var typesToMapping = (from x in Assembly.GetExecutingAssembly().GetTypes()
+                                  where x.IsClass && typeof(IConfiguration).IsAssignableFrom(x)
+                                  select x).ToList();
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
+            foreach (var mapping in typesToMapping)
             {
-                optionsBuilder.UseSqlServer(@"Server=DESKTOP-FGIG7N0\UNIDADE_IDS;Initial Catalog=QUAKE;User Id=sa;Password=unidade;Integrated Security=True");
+                dynamic mappingClass = Activator.CreateInstance(mapping);
+                modelBuilder.ApplyConfiguration(mappingClass);
             }
         }
     }

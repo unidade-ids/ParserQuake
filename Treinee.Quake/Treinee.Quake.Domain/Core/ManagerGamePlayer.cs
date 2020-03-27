@@ -6,24 +6,24 @@ namespace Treinee.Quake.Domain.Core
 {
     public class ManagerGamePlayer
     {
-        private readonly IRepositoryBase<GamePlayer> _repositoryGamePlayer;
+        private readonly IRepositorioGamePlayer _repositoryGamePlayer;
         private readonly IUnitOfWork _unitOfWork;
 
         public Game Game { get; set; }
         public Player Player { get; set; }
         public GamePlayer GamePlayer { get; set; }
-        public ManagerGamePlayer(IRepositoryBase<GamePlayer> repositoryGamePlayer, IUnitOfWork unitOfWork)
+        public ManagerGamePlayer(IRepositorioGamePlayer repositoryGamePlayer, IUnitOfWork unitOfWork)
         {
             _repositoryGamePlayer = repositoryGamePlayer;
             _unitOfWork = unitOfWork;
         }
 
-        public ManagerGamePlayer(Game game, Player player, IRepositoryBase<GamePlayer> repositoryGamePlayer, IUnitOfWork unitOfWork)
+        public ManagerGamePlayer(Game game, Player player, IRepositorioGamePlayer repositoryGamePlayer, IUnitOfWork unitOfWork)
         {
             this.Game             = game;
             this.Player           = player;
             _repositoryGamePlayer = repositoryGamePlayer;
-            _unitOfWork = unitOfWork;
+            _unitOfWork           = unitOfWork;
         }
 
         public async Task Save()
@@ -32,13 +32,16 @@ namespace Treinee.Quake.Domain.Core
             {
                 if (this.Game != null && this.Player != null)
                 {
-                    this.GamePlayer = new GamePlayer(this.Game, this.Player);
+                    if (!_repositoryGamePlayer.ThereGamePlayer(Game.ID, Player.ID))
+                    {
+                        this.GamePlayer = new GamePlayer(this.Game, this.Player);
 
-                    await _repositoryGamePlayer.Add(GamePlayer);
-                    await _unitOfWork.Save();
+                        await _repositoryGamePlayer.Add(GamePlayer);
+                        await _unitOfWork.Save();
+                    }
                 }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 throw;
             }

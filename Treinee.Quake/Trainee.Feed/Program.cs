@@ -1,5 +1,4 @@
-﻿using SimpleInjector;
-using SimpleInjector.Lifestyles;
+﻿using SimpleInjector.Lifestyles;
 using Trainee.Feed.Config;
 using Trainee.Feed.Core;
 using Treinee.Quake.Domain.Entity;
@@ -17,12 +16,12 @@ namespace Trainee.Feed
 
             using (ThreadScopedLifestyle.BeginScope(Factory.Container))
             {
-                var unit = Factory.Container.GetInstance<IUnitOfWork>();
-                var gameRepository = Factory.Container.GetInstance<IRepositoryBase<Game>>();
-                var gamePlayerRepository = Factory.Container.GetInstance<IRepositoryBase<GamePlayer>>();
-                var armorRepository = Factory.Container.GetInstance<IRepositoryBase<Armor>>();
-                var deathRepository = Factory.Container.GetInstance<IRepositoryBase<Death>>();
-                var playerRepository = Factory.Container.GetInstance<IRepositorioPlayer>();
+                var unit                 = Factory.Container.GetInstance<IUnitOfWork>();
+                var gameRepository       = Factory.Container.GetInstance<IRepositoryBase<Game>>();
+                var armorRepository      = Factory.Container.GetInstance<IRepositoryBase<Armor>>();
+                var deathRepository      = Factory.Container.GetInstance<IRepositoryBase<Death>>();
+                var playerRepository     = Factory.Container.GetInstance<IRepositorioPlayer>();
+                var gamePlayerRepository = Factory.Container.GetInstance<IRepositorioGamePlayer>();
 
                 try
                 {

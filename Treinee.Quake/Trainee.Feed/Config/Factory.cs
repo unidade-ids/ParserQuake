@@ -16,8 +16,9 @@ namespace Trainee.Feed.Config
 
             Container.Register(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
             Container.Register<IRepositorioPlayer, RepositorioPlayer>();
+            Container.Register<IRepositorioGamePlayer, RepositorioGamePlayer>();
 
-            
+
             Container.Register<IUnitOfWork, UnitOfWork>();
 
             Container.Verify();
