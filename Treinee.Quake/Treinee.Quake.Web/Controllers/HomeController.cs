@@ -6,13 +6,19 @@ namespace Treinee.Quake.Web.Controllers
     public class HomeController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public HomeController(IUnitOfWork unitOfWork)
+        private readonly IRepositoryDeath _repository;
+        public HomeController(IUnitOfWork unitOfWork, IRepositoryDeath repository)
         {
             _unitOfWork = unitOfWork;
+            _repository = repository;
         }
 
         public IActionResult Index()
         {
+            var deaths = _repository.GetTenDeaths();
+
+            //https://gist.github.com/labmorales/7ebd77411ad51c32179bd4c912096031
+
             return View();
         }
     }

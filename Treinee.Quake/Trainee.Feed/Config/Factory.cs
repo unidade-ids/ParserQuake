@@ -1,6 +1,9 @@
-﻿using SimpleInjector;
+﻿using Amazon.OpsWorks.Model;
+using Microsoft.EntityFrameworkCore;
+using SimpleInjector;
 using SimpleInjector.Lifestyles;
 using Treinee.Quake.Domain.Repository;
+using Treinee.Quake.Infra.Context;
 using Treinee.Quake.Infra.Repository;
 
 namespace Trainee.Feed.Config

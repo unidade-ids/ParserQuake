@@ -16,6 +16,8 @@ namespace Treinee.Quake.IoC
 
             servicos.AddTransient(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
             servicos.AddTransient(typeof(IUnitOfWork), typeof(UnitOfWork));
+
+            servicos.AddTransient<IRepositoryDeath, RepositoryDeath>();
         }
     }
 }
