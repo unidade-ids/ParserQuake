@@ -19,7 +19,15 @@ namespace Treinee.Quake.Web.Controllers
 
             //https://gist.github.com/labmorales/7ebd77411ad51c32179bd4c912096031
 
-            return View();
+            return View(deaths);
+        }
+
+        [HttpGet]
+        public IActionResult SearchByName(string search)
+        {
+            var deaths = _repository.GetDeaths(search);
+
+            return PartialView("_Kills", deaths);
         }
     }
 }

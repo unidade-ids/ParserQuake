@@ -1,0 +1,74 @@
+﻿body {
+    background-color: #ddd;
+    margin: auto;
+    width: 50%;
+}
+
+table {
+    margin-top: 30px;
+    width: 600px;
+}
+
+    table thead {
+        background-color: #FFA500;
+        font-size: 30px;
+        padding: 15px;
+    }
+
+.even {
+    background-color: #696969;
+}
+
+.odd {
+    background-color: #A9A9A9;
+}
+
+thead tr {
+    height: 75px;
+}
+
+input[type=text] {
+    border: 2px solid white;
+    background-color: #ddd;
+    height: 50px;
+    width: 450px;
+    padding: 5px;
+    border-right: none;
+}
+
+input[type=submit] {
+    position: relative;
+    left: -5px;
+    width: 150px;
+    height: 50px;
+    background-color: #ddd;
+    border: none;
+    background-color: #696969;
+    color: #FFA500;
+}
+
+tr {
+    height: 50px;
+}
+
+th, td {
+    padding: 10px;
+}
+
+td {
+    color: white;
+}
+
+.bones {
+    width: 160px;
+    text-align: center;
+}
+
+    .bones img {
+        text-align: left;
+        width: 45px;
+    }
+
+.count {
+    font-weight: bold;
+}

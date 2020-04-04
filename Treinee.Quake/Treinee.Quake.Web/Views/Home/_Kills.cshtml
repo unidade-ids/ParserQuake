@@ -1,0 +1,27 @@
+﻿@model List<Treinee.Quake.Domain.ValuesObject.Kills>
+
+<table>
+    <thead>
+        <tr>
+            <th>NAME</th>
+            <th class="bones">
+                <img src="~/imagem/bones.svg" />
+                <span>
+                    KILLS
+                </span>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            for (int i = 0; i < Model.Count(); i++)
+            {
+                <tr class="@(i % 2 != 0 ? "even" : "odd")">
+                    <td>@Model[i].Nome</td>
+                    <td class="bones count">@Model[i].Quantidade</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using Treinee.Quake.Domain.Entity;
 using Treinee.Quake.Domain.Repository;
+using Treinee.Quake.Domain.ValuesObject;
 using Treinee.Quake.Infra.Context;
 
 namespace Treinee.Quake.Infra.Repository
@@ -13,14 +15,32 @@ namespace Treinee.Quake.Infra.Repository
         {
         }
 
-        public IQueryable<Death> GetDeaths(string name)
+        public IList<Kills> GetDeaths(string name)
         {
-            return this._context.Death.Take(10);
+            var deaths = this._context.Death.Include(k => k.Killer)
+                             .Where(k => k.Killer.Name.Equals(name) && !k.Killer.Name.Equals("<world>"))
+                             .GroupBy(dd => dd.Killer.Name)
+                             .Select(g => new Kills
+                             {
+                                Nome = g.Key,
+                                Quantidade = g.Count()
+                             }).ToList();
+
+            return deaths;
         }
 
-        public IQueryable<Death> GetTenDeaths()
+        public IList<Kills> GetTenDeaths()
         {
-            return this._context.Death.Take(10);
+            var deaths = this._context.Death.Include(k => k.Killer)
+                .Where(k => !k.Killer.Name.Equals("<world>"))
+                .GroupBy(dd => dd.Killer.Name)
+                .Select(g => new Kills
+                {
+                    Nome = g.Key,
+                    Quantidade = g.Count()
+                }).ToList();
+
+            return deaths;
         }
     }
 }

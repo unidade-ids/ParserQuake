@@ -1,89 +1,18 @@
-﻿@{
+﻿@model List<Treinee.Quake.Domain.ValuesObject.Kills>
+
+@{
     ViewData["Title"] = "Home Page";
 }
-
-<style>
-    body {
-        background-color: #ddd;
-        margin: auto;
-        width: 50%;
-    }
-
-    table {
-        margin-top: 30px;
-        width: 600px;
-    }
-
-        table thead {
-            background-color: #FFA500;
-            font-size: 15px;
-            padding: 15px;
-        }
-
-    tbody tr {
-        background-color: #A9A9A9;
-    }
-
-    input[type=text] {
-        border: 2px solid white;
-        background-color: #ddd;
-        height: 50px;
-        width: 450px;
-        padding: 5px;
-        border-right: none;
-    }
-
-    input[type=submit] {
-        position: relative;
-        left: -5px;
-        width: 150px;
-        height: 50px;
-        background-color: #ddd;
-        border: none;
-        background-color: #696969;
-        color: #FFA500;
-    }
-
-    tr {
-        height: 50px;
-    }
-</style>
-
 
 <h1>RANKING</h1>
 
 <div id="cnt-res">
+    <form method="get" asp-action="SearchByName" data-ajax="true" data-ajax-method="post" data-ajax-update="#panel">
+        <input type="text" name="search" id="search" placeholder="Busca por nomes" />
+        <input type="submit" value="Buscar" />
+    </form>
 
-    <div>
-        <form id="" name="" action="#">
-            <input type="text" name="" id="" placeholder="Busca por nome" />
-            <input type="submit" value="Buscar" />
-        </form>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>NAME</th>
-                    <th>KILLS</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>XXXXXX</td>
-                    <td>111</td>
-                </tr>
-            </tbody>
-        </table>
-
+    <div id="panel">
+        <partial name="_Kills" model="Model" />
     </div>
-
-
 </div>
-
-@section Scripts
-    {
-    <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.5.0.js"></script>
-    <script>
-
-    </script>
-}
