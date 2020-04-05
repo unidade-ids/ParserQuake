@@ -18,7 +18,7 @@ namespace Treinee.Quake.Infra.Repository
         public IList<Kills> GetDeaths(string name)
         {
             var deaths = this._context.Death.Include(k => k.Killer)
-                             .Where(k => k.Killer.Name.Equals(name) && !k.Killer.Name.Equals("<world>"))
+                             .Where(k => k.Killer.Name.Contains(name) && !k.Killer.Name.Equals("<world>"))
                              .GroupBy(dd => dd.Killer.Name)
                              .Select(g => new Kills
                              {

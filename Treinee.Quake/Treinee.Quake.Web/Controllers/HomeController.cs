@@ -22,7 +22,7 @@ namespace Treinee.Quake.Web.Controllers
             return View(deaths);
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult SearchByName(string search)
         {
             var deaths = _repository.GetDeaths(search);
